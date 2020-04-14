@@ -124,7 +124,7 @@ def generate_episode(pi, epsilon=0.4):
 				return states, actions, rewards
 	return states, actions, rewards
 
-def train(gamma=0.5,l_r=0.1, episodes=2000):
+def train(gamma=0.5,l_r=0.1, episodes=20000):
 	q_table = np.ones((2,22,11,2)) ## Usable aces, player hand, dealer showing, actions
 	pi = np.zeros((2, 22, 11)) ## Usable aces, player hand, dealer showing
 	for episode in range(episodes):
