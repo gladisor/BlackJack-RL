@@ -124,17 +124,17 @@ def generate_episode(pi, epsilon=0.4):
 				return states, actions, rewards
 	return states, actions, rewards
 
-def train(gamma=0.5, episodes=1000):
+def train(gamma=0.5,l_r=0.1, episodes=2000):
 	q_table = np.ones((2,22,11,2)) ## Usable aces, player hand, dealer showing, actions
-	pi = np.ones((2, 22, 11)) ## Usable aces, player hand, dealer showing
+	pi = np.zeros((2, 22, 11)) ## Usable aces, player hand, dealer showing
 	for episode in range(episodes):
 		states, actions, rewards = generate_episode(pi)
 		G = 0
 		for i in range(len(states)-1, -1, -1):
 			G = gamma*G + rewards[i]
-			## Average the q table entry with current expected reward G
-			q_table[states[i][0]][states[i][1]][states[i][2]][int(actions[i])] += G
-			q_table[states[i][0]][states[i][1]][states[i][2]][int(actions[i])] /= 2
+			## Using update rule
+			Q_St_At = q_table[states[i][0]][states[i][1]][states[i][2]][int(actions[i])]
+			q_table[states[i][0]][states[i][1]][states[i][2]][int(actions[i])] = Q_St_At + l_r*(G - Q_St_At)
 			## A = greedy action
 			A = np.argmax(q_table[states[i][0]][states[i][1]][states[i][2]])
 			pi[states[i][0]][states[i][1]][states[i][2]] = A
