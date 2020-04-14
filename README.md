@@ -2,7 +2,9 @@
 
 This is my first RL agent using a Monte Carlo method. First we generate an episode. Then loop back through each step and
 assign each state value pair the current value of the expected reward. Once an episode is completed the current policy is
-updated to be greedy with respect to the current action values.
+updated to be greedy with respect to the current action values. Here is the optimal policy after 20000 games:
+
+![](images/strategy.png)
 
 ## Getting Started
 
