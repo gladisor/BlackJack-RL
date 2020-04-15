@@ -83,9 +83,9 @@ def generate_episode(pi, epsilon=0.4):
 		## Agent turn:
 		while True:
 			if np.random.random() > p_random_a:
-				action = np.random.randint(2)
+				action = int(np.random.randint(2))
 			else:
-				action = pi[state[0]][state[1]][state[2]]
+				action = int(pi[state[0]][state[1]][state[2]])
 
 			actions.append(action)
 			## Player action
@@ -124,7 +124,7 @@ def generate_episode(pi, epsilon=0.4):
 				return states, actions, rewards
 	return states, actions, rewards
 
-def train(gamma=0.5,l_r=0.1, episodes=20000):
+def train(gamma=0.5,l_r=0.05, episodes=20000):
 	q_table = np.ones((2,22,11,2)) ## Usable aces, player hand, dealer showing, actions
 	pi = np.zeros((2, 22, 11)) ## Usable aces, player hand, dealer showing
 	for episode in range(episodes):
